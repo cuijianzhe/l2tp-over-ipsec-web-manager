@@ -38,7 +38,7 @@ def check_user(username):
             if eval(user) == username:
                 return True
 
-#本地测试
+#本地windows测试
 def login(request):
     msg = ""
     if request.method == 'GET':
@@ -107,24 +107,28 @@ def login(request):
         request.session.set_expiry(0)  #session在关闭浏览器后失效
         CMD = "openssl passwd -1 %s" % pwd
         pwd_str = subprocess.getoutput(CMD)
-        try:
-            with open(settings.ipsecpwd_path, encoding='utf-8') as p1, \
-                    open(settings.ipsecpwd_path, encoding='utf-8', mode='a') as p2:
-                for line in p1:
-                    username, password, psk = line.split(':')
-                    if not user == username:
-                        print(username, user)
-                p2.write('{}:{}:{}\n'.format(user, pwd_str, 'xauth-psk'))
-            with open(settings.filedata_path, encoding='utf-8') as f1, \
-                    open(settings.filedata_path, encoding='utf-8', mode='a') as f2:
-                for line in f1:
-                    username, l2tp, password, all = line.split(' ')
-                    if not user == username:
-                        print(username, user)
-                f2.write('"{}" {} "{}" {}\n'.format(user, 'l2tpd', pwd, '*'))
+        #判断账号文件是否存在此登录用户
+        if check_user(user):
             return redirect("/index")
-        except Exception as e:
-            hint = '<script>alert("添加失败！");window.location.href="/index/"</script>'
+        else:
+            try:
+                with open(settings.ipsecpwd_path, encoding='utf-8') as p1, \
+                        open(settings.ipsecpwd_path, encoding='utf-8', mode='a') as p2:
+                    for line in p1:
+                        username, password, psk = line.split(':')
+                        if not user == username:
+                            print(username, user)
+                    p2.write('{}:{}:{}\n'.format(user, pwd_str, 'xauth-psk'))
+                with open(settings.filedata_path, encoding='utf-8') as f1, \
+                        open(settings.filedata_path, encoding='utf-8', mode='a') as f2:
+                    for line in f1:
+                        username, l2tp, password, all = line.split(' ')
+                        if not user == username:
+                            print(username, user)
+                    f2.write('"{}" {} "{}" {}\n'.format(user, 'l2tpd', pwd, '*'))
+                return redirect("/index")
+            except Exception as e:
+                hint = '<script>alert("添加失败！");window.location.href="/index/"</script>'
         return hint
 
     else:
@@ -190,7 +194,7 @@ def userInfo(request):
     info_list.append(info)
     return render(request, "index_info.html", {"info_list": info_list})
 
-
+@check_login
 def delete(request):
     print('===========================')
     print(request.GET)
