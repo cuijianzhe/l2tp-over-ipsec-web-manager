@@ -36,6 +36,7 @@ def check_user(username):
                 return True
 
 #本地windows测试
+'''
 def login(request):
     msg = ""
     if request.method == 'GET':
@@ -84,9 +85,10 @@ def login(request):
     else:
         msg = "用户名或者密码错误"
     return render(request,"login.html",{"error": msg})
+'''
 
 #服务器配置
-'''
+
 def login(request):
     msg = ""
     if request.method == 'GET':
@@ -131,7 +133,6 @@ def login(request):
     else:
         msg = "用户名或者密码错误"
     return render(request,"login.html",{"error": msg})
-'''
 
 
 # 装饰器函数，用来判断是否登录
