@@ -1,5 +1,3 @@
-from django.shortcuts import render
-
 # Create your views here.
 from django.shortcuts import HttpResponse,render,redirect
 from vpnmanager import settings
@@ -169,7 +167,8 @@ def index(request):
             user, l2tp, pwd, all = line.split(' ')
             print(eval(user) + '\t' + 'user')
             if eval(user) == username:
-                dic = {"user":json.loads(user),"pwd":json.loads(pwd)}
+                # dic = {"user":json.loads(user),"pwd":json.loads(pwd)}
+                dic = {"user": json.loads(user), "pwd": 'enable'}
                 lt_list.append(dic)
     return render(request,"index.html",{"lt_list":lt_list})
 
@@ -217,3 +216,14 @@ def delete(request):
                     continue                 #删除ipsec passwd文件内容
                 i_w.write(line)
     return redirect('/index/')
+
+@check_login
+def readDoc():
+    pass
+
+
+@check_login
+def logout(request):
+    request.session.get("is_login")
+    request.session.clear() #清除所有session
+    return redirect('/login')
