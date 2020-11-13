@@ -25,4 +25,9 @@ urlpatterns = [
     path('delete/',views.delete),
     path('vpnDoc/',views.readDoc),
     path('logout/', views.logout),
+    #admin
+    path('edit/', views.edit),
+    path('add/', views.add),
+    path('admin_index/',views.admin_index),
+
 ]

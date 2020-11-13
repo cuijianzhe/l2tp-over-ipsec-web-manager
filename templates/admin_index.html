@@ -13,12 +13,10 @@
 <nav class="navbar navbar-inverse" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
-            <h5 class="navbar-brand">账户服务台</h5>
+            <h5 class="navbar-brand">账户管理服务台</h5>
         </div>
 
         <ul class="nav navbar-nav navbar-right">
-
-{#            <li><a href="/logout/"><span class="glyphicon glyphicon-log-in"></span> 用户名</a></li>#}
             <li><a href="/logout/"><span class="glyphicon glyphicon-log-in"></span> 退出</a></li>
         </ul>
     </div>
@@ -32,16 +30,16 @@
             <table class="table table-bordered table-hover ">
 
             <tr>
-            <h3 style="text-align: center">VPN账户列表</h3>
+            <h3 style="text-align: center">账户列表</h3>
             </tr>
 
-        <a href="/vpnDoc/">
-            <button type="button" class="btn btn-primary">使用说明</button>
+        <a href="/add/">
+            <button type="button" class="btn btn-primary">添加用户</button>
         </a>
 
         <tr>
-            <th>VPN用户名</th>
-            <th>账号状态</th>
+            <th>用户名</th>
+            <th>密码</th>
             <th>操作</th>
         </tr>
         {% for foo in lt_list %}
@@ -50,7 +48,7 @@
             <td>{{ foo.pwd }}</td>
             <td>
                 <span>
-                    <a href="/info/?username={{ foo.user }}" class="btn btn-info">详情</a>
+                    <a href="/edit/?username={{ foo.user }}" class="btn btn-info">修改</a>
                 </span>
 
                 <span>
