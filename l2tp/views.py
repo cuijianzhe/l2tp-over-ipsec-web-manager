@@ -1,5 +1,6 @@
 # Create your views here.
 from django.shortcuts import HttpResponse,render,redirect
+from django.http import HttpResponseRedirect
 from vpnmanager import settings
 from functools import wraps
 import os
@@ -168,7 +169,7 @@ def index(request):
             print(eval(user) + '\t' + 'user')
             if eval(user) == username:
                 # dic = {"user":json.loads(user),"pwd":json.loads(pwd)}
-                dic = {"user": json.loads(user), "pwd": 'enable'}
+                dic = {"user": json.loads(user), "pwd": 'enable(已激活)'}
                 lt_list.append(dic)
     return render(request,"index.html",{"lt_list":lt_list})
 
@@ -218,8 +219,8 @@ def delete(request):
     return redirect('/index/')
 
 @check_login
-def readDoc():
-    pass
+def readDoc(request):
+    return HttpResponseRedirect('http://showdoc.limikeji.com/web/#/5?page_id=25')
 
 
 @check_login
