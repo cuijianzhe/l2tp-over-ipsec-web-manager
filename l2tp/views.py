@@ -237,11 +237,13 @@ def admin_auth(username, password):
             line = line.strip()
             if not line == '':
                 user, pwd = line.split("|")
+                print(user)
+                print(pwd)
                 if username == user and password == pwd:
                     return True
 
 @check_login
-def admin(request):
+def admin_login(request):
     if request.method == 'GET':
         return render(request, 'admin_login.html')
     else:
@@ -274,75 +276,75 @@ def admin_index(request):
             lt_list.append(dic)
     return render(request,"admin_index.html",{"lt_list":lt_list})
 
-@check_login
-def edit(request):
-    if request.method == "GET":
-        name = request.GET.get("username",None)
-        if name:
-            with open(settings.filedata_path, "r", encoding="utf-8") as f:
-                for line in f:
-                    username, l2tp, password, all = line.split(' ')
-                    dic = {}
-                    dic['user'] = json.loads(username)
-                    dic['password'] = json.loads(password)
-                    if name in username:
-                        return render(request,"edit.html",{"row":dic})
-    if request.method == "POST":
-        print(request.POST)
-        old_user = request.GET.get("username")
-        print(old_user)
-        user = request.POST.get("user")
-        pwd = request.POST.get("pwd")
-        CMD = "openssl passwd -1 %s" % pwd
-        pwd_str = subprocess.getoutput(CMD)
-        if old_user:
-            with open(settings.filedata_path, encoding='utf-8') as f1, \
-                    open(settings.filedata_path_bak, encoding='utf-8', mode='w') as f2:
-                for line in f1:
-                    username, l2tp, password, all = line.split(' ')
-                    if old_user in username:
-                        line = '"{}" {} "{}" {}\n'.format(user, 'l2tpd', pwd, '*')
-                    f2.write(line)
-            os.remove(settings.filedata_path)
-            os.rename(settings.filedata_path_bak, settings.filedata_path)
-            with open(settings.ipsecpwd_path, encoding='utf-8') as p1, \
-                    open(settings.ipsecpwd_path_bak, encoding='utf-8', mode='w') as p2:
-                for line in p1:
-                    username, password, psk = line.split(':')
-                    if old_user in username:
-                        line = '{}:{}:{}\n'.format(user,pwd_str,'xauth-psk')
-                    p2.write(line)
-            os.remove(settings.ipsecpwd_path)
-            os.rename(settings.ipsecpwd_path_bak, settings.ipsecpwd_path)
-            return redirect("/admin_index/")
-    return redirect('/admin_index/')
-
-@check_login
-def add(request):
-    if request.method == "GET":
-        return render(request,"add.html")
-
-    if request.method == "POST":
-        user = request.POST.get("user")
-        pwd = request.POST.get("pwd")
-    CMD = "openssl passwd -1 %s"%pwd
-    pwd_str = subprocess.getoutput(CMD)
-    try:
-        with open(settings.ipsecpwd_path, encoding='utf-8') as p1, \
-                open(settings.ipsecpwd_path, encoding='utf-8', mode='a') as p2:
-             for line in p1:
-                 username,password,psk = line.split(':')
-                 if not user == username:
-                    print(username,user)
-             p2.write('{}:{}:{}\n'.format(user,pwd_str,'xauth-psk'))
-        with open(settings.filedata_path, encoding='utf-8') as f1, \
-                open(settings.filedata_path, encoding='utf-8', mode='a') as f2:
-              for line in f1:
-                   username, l2tp, password, all = line.split(' ')
-                   if not user == username:
-                      print(username,user)
-              f2.write('"{}" {} "{}" {}\n'.format(user,'l2tpd',pwd,'*'))
-        return redirect("/admin_index")
-    except Exception as e:
-        hint = '<script>alert("添加失败！");window.location.href="/index/"</script>'
-    return hint
+# @check_login
+# def edit(request):
+#     if request.method == "GET":
+#         name = request.GET.get("username",None)
+#         if name:
+#             with open(settings.filedata_path, "r", encoding="utf-8") as f:
+#                 for line in f:
+#                     username, l2tp, password, all = line.split(' ')
+#                     dic = {}
+#                     dic['user'] = json.loads(username)
+#                     dic['password'] = json.loads(password)
+#                     if name in username:
+#                         return render(request,"edit.html",{"row":dic})
+#     if request.method == "POST":
+#         print(request.POST)
+#         old_user = request.GET.get("username")
+#         print(old_user)
+#         user = request.POST.get("user")
+#         pwd = request.POST.get("pwd")
+#         CMD = "openssl passwd -1 %s" % pwd
+#         pwd_str = subprocess.getoutput(CMD)
+#         if old_user:
+#             with open(settings.filedata_path, encoding='utf-8') as f1, \
+#                     open(settings.filedata_path_bak, encoding='utf-8', mode='w') as f2:
+#                 for line in f1:
+#                     username, l2tp, password, all = line.split(' ')
+#                     if old_user in username:
+#                         line = '"{}" {} "{}" {}\n'.format(user, 'l2tpd', pwd, '*')
+#                     f2.write(line)
+#             os.remove(settings.filedata_path)
+#             os.rename(settings.filedata_path_bak, settings.filedata_path)
+#             with open(settings.ipsecpwd_path, encoding='utf-8') as p1, \
+#                     open(settings.ipsecpwd_path_bak, encoding='utf-8', mode='w') as p2:
+#                 for line in p1:
+#                     username, password, psk = line.split(':')
+#                     if old_user in username:
+#                         line = '{}:{}:{}\n'.format(user,pwd_str,'xauth-psk')
+#                     p2.write(line)
+#             os.remove(settings.ipsecpwd_path)
+#             os.rename(settings.ipsecpwd_path_bak, settings.ipsecpwd_path)
+#             return redirect("/admin_index/")
+#     return redirect('/admin_index/')
+#
+# @check_login
+# def add(request):
+#     if request.method == "GET":
+#         return render(request,"add.html")
+#
+#     if request.method == "POST":
+#         user = request.POST.get("user")
+#         pwd = request.POST.get("pwd")
+#     CMD = "openssl passwd -1 %s"%pwd
+#     pwd_str = subprocess.getoutput(CMD)
+#     try:
+#         with open(settings.ipsecpwd_path, encoding='utf-8') as p1, \
+#                 open(settings.ipsecpwd_path, encoding='utf-8', mode='a') as p2:
+#              for line in p1:
+#                  username,password,psk = line.split(':')
+#                  if not user == username:
+#                     print(username,user)
+#              p2.write('{}:{}:{}\n'.format(user,pwd_str,'xauth-psk'))
+#         with open(settings.filedata_path, encoding='utf-8') as f1, \
+#                 open(settings.filedata_path, encoding='utf-8', mode='a') as f2:
+#               for line in f1:
+#                    username, l2tp, password, all = line.split(' ')
+#                    if not user == username:
+#                       print(username,user)
+#               f2.write('"{}" {} "{}" {}\n'.format(user,'l2tpd',pwd,'*'))
+#         return redirect("/admin_index")
+#     except Exception as e:
+#         hint = '<script>alert("添加失败！");window.location.href="/index/"</script>'
+#     return hint
