@@ -19,7 +19,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 #windows目录
 # filedata_dir = os.path.join("data")  #读取L2TP文件目录
 # ipsecpwd_dir = os.path.join("ipsec") #读取ipsec passwd文件
-# centos 目录
+# # centos 目录
 filedata_dir = os.path.join("/etc/ppp")  #读取L2TP文件目录
 ipsecpwd_dir = os.path.join("/etc/ipsec.d") #读取ipsec passwd文件
 filedata_path=os.path.join(filedata_dir,"chap-secrets")  # 配置文件

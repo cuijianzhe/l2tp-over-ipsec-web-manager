@@ -26,9 +26,9 @@ urlpatterns = [
     path('vpnDoc/',views.readDoc),
     path('logout/', views.logout),
     #admin
-    # path('admin',views.admin),
-    # path('edit/', views.edit),
-    # path('add/', views.add),
-    # path('admin_index/',views.admin_index),
+    path('admin',views.admin),
+    path('edit/', views.edit),
+    path('add/', views.add),
+    path('admin_index/',views.admin_index),
 
 ]
