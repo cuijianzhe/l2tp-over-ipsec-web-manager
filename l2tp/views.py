@@ -32,7 +32,7 @@ def check_user(username):
         for line in info:
             # dic = {}
             user, l2tp, pwd, all = line.split(' ')
-            if eval(user) == username or eval(user) == 'admin':
+            if eval(user) == username or user == "admin":
                 return True
 
 #本地windows测试
