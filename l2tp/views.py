@@ -194,30 +194,6 @@ def userInfo(request):
     return render(request, "index_info.html", {"info_list": info_list})
 
 @check_login
-def delete(request):
-    print('===========================')
-    print(request.GET)
-    name = request.GET.get("username",None)
-    if name:
-        with open(settings.filedata_path, "r", encoding="utf-8") as f:
-            lines = f.readlines()
-        with open(settings.filedata_path, "w", encoding="utf-8") as f_w:
-            for line in lines:
-                username, l2tp, password, all = line.split(' ')
-                if name in username:
-                    continue
-                f_w.write(line)
-        with open(settings.ipsecpwd_path, "r", encoding="utf-8") as i:
-            lines = i.readlines()
-        with open(settings.ipsecpwd_path, "w", encoding="utf-8") as i_w:
-            for line in lines:
-                username,pwd,psk = line.split(':')
-                if name in username:
-                    continue                 #删除ipsec passwd文件内容
-                i_w.write(line)
-    return redirect('/index/')
-
-@check_login
 def readDoc(request):
     return redirect('http://showdoc.limikeji.com/web/#/5?page_id=25')
 

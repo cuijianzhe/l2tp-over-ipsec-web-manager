@@ -23,7 +23,6 @@ urlpatterns = [
     path('login/', views.login),
     path('index/', views.index),
     path('info/',views.userInfo),
-    path('delete/',views.delete),
     path('vpnDoc/',views.readDoc),
     path('logout/', views.logout),
     #admin
