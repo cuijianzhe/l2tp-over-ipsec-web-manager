@@ -30,6 +30,7 @@ urlpatterns = [
     path('admin',adminviews.admin_login),
     path('edit/', adminviews.edit),
     path('add/', adminviews.add),
+    path('delete/', adminviews.delete),
     path('admin_index/',adminviews.admin_index),
     path('admin_logout/',adminviews.admin_logout),
 

@@ -147,6 +147,30 @@ def add(request):
     return hint
 
 @check_adminlogin
+def delete(request):
+    print('===========================')
+    print(request.GET)
+    name = request.GET.get("username",None)
+    if name:
+        with open(settings.filedata_path, "r", encoding="utf-8") as f:
+            lines = f.readlines()
+        with open(settings.filedata_path, "w", encoding="utf-8") as f_w:
+            for line in lines:
+                username, l2tp, password, all = line.split(' ')
+                if name in username:
+                    continue
+                f_w.write(line)
+        with open(settings.ipsecpwd_path, "r", encoding="utf-8") as i:
+            lines = i.readlines()
+        with open(settings.ipsecpwd_path, "w", encoding="utf-8") as i_w:
+            for line in lines:
+                username,pwd,psk = line.split(':')
+                if name in username:
+                    continue                 #删除ipsec passwd文件内容
+                i_w.write(line)
+    return redirect('/admin_index/')
+
+@check_adminlogin
 def admin_logout(request):
     request.session.get("login")
     request.session.clear() #清除所有session
