@@ -141,7 +141,7 @@ def add(request):
                    if not user == username:
                       print(username,user)
               f2.write('"{}" {} "{}" {}\n'.format(user,'l2tpd',pwd,'*'))
-        return redirect("/admin_index")
+        return redirect("/admin_index/")
     except Exception as e:
         hint = '<script>alert("添加失败！");window.location.href="/index/"</script>'
     return hint
