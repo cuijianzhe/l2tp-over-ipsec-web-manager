@@ -19,7 +19,7 @@ from l2tp import views
 from administrator import views as adminviews
 urlpatterns = [
     # path('admin/', admin.site.urls),
-    # path('', views.login),
+    path('', views.login),
     path('login/', views.login),
     path('index/', views.index),
     path('info/',views.userInfo),
