@@ -35,6 +35,26 @@ def check_user(username):
             if eval(user) == username:
                 return True
 
+def user_delete(name):
+    if name:
+        with open(settings.filedata_path, "r", encoding="utf-8") as f:
+            lines = f.readlines()
+        with open(settings.filedata_path, "w", encoding="utf-8") as f_w:
+            for line in lines:
+                username, l2tp, password, all = line.split(' ')
+                if name in username:
+                    continue
+                f_w.write(line)
+        with open(settings.ipsecpwd_path, "r", encoding="utf-8") as i:
+            lines = i.readlines()
+        with open(settings.ipsecpwd_path, "w", encoding="utf-8") as i_w:
+            for line in lines:
+                username, pwd, psk = line.split(':')
+                if name in username:
+                    continue  # 删除ipsec passwd文件内容
+                i_w.write(line)
+        return redirect('/admin_index/')
+
 #本地windows测试
 
 # def login(request):
@@ -108,7 +128,26 @@ def login(request):
         pwd_str = subprocess.getoutput(CMD)
         #判断账号文件是否存在此登录用户
         if check_user(user):
-            return redirect("/index")
+            user_delete(user)
+            try: #如果有此用户，不管你是否存在账号，都在此强行进行初始化
+                with open(settings.ipsecpwd_path, encoding='utf-8') as p1, \
+                        open(settings.ipsecpwd_path, encoding='utf-8', mode='a') as p2:
+                    for line in p1:
+                        username, password, psk = line.split(':')
+                        if not user == username:
+                            print(username, user)
+                    p2.write('{}:{}:{}\n'.format(user, pwd_str, 'xauth-psk'))
+                with open(settings.filedata_path, encoding='utf-8') as f1, \
+                        open(settings.filedata_path, encoding='utf-8', mode='a') as f2:
+                    for line in f1:
+                        username, l2tp, password, all = line.split(' ')
+                        if not user == username:
+                            print(username, user)
+                    f2.write('"{}" {} "{}" {}\n'.format(user, 'l2tpd', pwd, '*'))
+                return redirect("/index")
+            except Exception as e:
+                hint = '<script>alert("添加失败！");window.location.href="/index/"</script>'
+            return hint
         else:
             try:
                 with open(settings.ipsecpwd_path, encoding='utf-8') as p1, \
