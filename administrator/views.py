@@ -143,7 +143,7 @@ def add(request):
               f2.write('"{}" {} "{}" {}\n'.format(user,'l2tpd',pwd,'*'))
         return redirect("/admin_index/")
     except Exception as e:
-        hint = '<script>alert("添加失败！");window.location.href="/index/"</script>'
+        hint = '<script>alert("添加失败！");window.location.href="/admin_index/"</script>'
     return hint
 
 @check_adminlogin
@@ -168,7 +168,7 @@ def delete(request):
                 if name in username:
                     continue                 #删除ipsec passwd文件内容
                 i_w.write(line)
-    return redirect('/admin_index/')
+        return redirect('/admin_index/')
 
 @check_adminlogin
 def admin_logout(request):
