@@ -16,9 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from l2tp import views
+from administrator import views as adminviews
 urlpatterns = [
     # path('admin/', admin.site.urls),
-    path('', views.login),
+    # path('', views.login),
     path('login/', views.login),
     path('index/', views.index),
     path('info/',views.userInfo),
@@ -26,9 +27,10 @@ urlpatterns = [
     path('vpnDoc/',views.readDoc),
     path('logout/', views.logout),
     #admin
-    path('admin',views.admin_login),
-    # path('edit/', views.edit),
-    # path('add/', views.add),
-    path('admin_index/',views.admin_index),
+    path('admin',adminviews.admin_login),
+    path('edit/', adminviews.edit),
+    path('add/', adminviews.add),
+    path('admin_index/',adminviews.admin_index),
+    path('admin_logout/',adminviews.admin_logout),
 
 ]

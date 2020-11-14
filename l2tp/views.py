@@ -241,8 +241,28 @@ def admin_auth(username, password):
                 print(pwd)
                 if username == user and password == pwd:
                     return True
+# 装饰器函数，用来判断是否登录
+def check_adminlogin(func):
+    @wraps(func)  # 装饰器修复技术
+    def inner(request, *args, **kwargs):
+        ret = request.session.get("is_login")
+        print(ret)
+        # 1. 获取cookie中的随机字符串
+        # 2. 根据随机字符串去文件取 session_data --> 解密 --> 反序列化成字典
+        # 3. 在字典里面 根据 is_login 取具体的数据
+        if ret == "1":
+            # 已经登录，继续执行
+            return func(request, *args, **kwargs)
+        # 没有登录过
+        else:
+            # ** 即使登录成功也只能跳转到index页面，现在通过在URL中加上next指定跳转的页面
+            # 获取当前访问的URL
+            next_url = request.path_info
+            print(next_url)
+            return redirect("/admin_login/?next={}".format(next_url))
+    return inner
 
-@check_login
+@check_adminlogin
 def admin_login(request):
     if request.method == 'GET':
         return render(request, 'admin_login.html')
@@ -265,7 +285,7 @@ def admin_login(request):
         msg = "用户名或者密码错误"
     return render(request, "admin_login.html", {"error": msg})
 
-@check_login
+@check_adminlogin
 def admin_index(request):
     lt_list=[]
     with open(settings.filedata_path, encoding='utf-8') as f1:
