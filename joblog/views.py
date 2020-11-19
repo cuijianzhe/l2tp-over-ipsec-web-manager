@@ -4,10 +4,9 @@ from vpnmanager import settings
 
 def JobLogView(request):
     log_file = settings.logfile_path
-    log_content = []
-
-    log_content += [line for line in open(log_file, 'r', encoding='UTF-8')]
-
+    # log_content += [line for line in open(log_file, 'r', encoding='UTF-8')]
+    with open(log_file,'r',encoding='utf-8') as log:
+        log_content = log.readlines()
     context = {
         'page_name': 'vpn连接日志',
         'log_content': log_content,
