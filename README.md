@@ -6,10 +6,20 @@
 * 用户详情信息
 
 ## 1.2. administrator权限
-* 可对任何用户进行增删改查
-* 可查看普通用户登录日志
 
 ![](https://github.com/cuijianzhe/l2tp-over-ipsec-web-manager/blob/master/images/admin.png?raw=true)
+
+* 可对任何用户进行增删改查
+
+![]()
+
+![](https://github.com/cuijianzhe/l2tp-over-ipsec-web-manager/blob/master/images/edit.png?raw=true)
+
+* 可查看普通用户登录日志
+
+![](https://github.com/cuijianzhe/l2tp-over-ipsec-web-manager/blob/master/images/logfile.png?raw=true)
+
+
 
 ##### 1.2.1.1.1. 启动方式：
 ```
