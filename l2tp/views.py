@@ -18,9 +18,8 @@ def auth(username,password):
         'type': 0,
         "password":password
     }
-    json_data = json.dumps(data)
     headers = {'Content-Type':'application/json; charset=UTF-8'}
-    code = json.loads(requests.post(url, headers=headers,data=json_data).text).get('code')
+    code = json.loads(requests.post(url, headers=headers,data=json.dumps(data)).text).get('code')
     if code == '000000':
         return True
     else:

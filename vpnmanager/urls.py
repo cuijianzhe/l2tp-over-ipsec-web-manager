@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path,include
 from l2tp import views
 from administrator import views as adminviews
+from joblog import views as jobviews
 urlpatterns = [
     # path('admin/', admin.site.urls),
     path('', views.login),
@@ -33,5 +34,7 @@ urlpatterns = [
     path('delete/', adminviews.delete),
     path('admin_index/',adminviews.admin_index),
     path('admin_logout/',adminviews.admin_logout),
+    #logviews
+    path('logviews/',jobviews.JobLogView)
 
 ]

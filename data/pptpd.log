@@ -1,0 +1,115 @@
+##################################
+Now User zhangwei is connected!!!
+##################################
+time: 2020-11-18_20:14:51
+clientIP: 
+username: zhangwei
+device: ppp0
+vpnIP: 192.168.42.1
+assignIP: 192.168.42.10
+#####################################
+Now User zhangwei is disconnected!!!
+#####################################
+time: 2020-11-18_20:17:26
+clientIP: 
+username: zhangwei
+device: ppp0
+vpnIP: 192.168.42.1
+assignIP: 192.168.42.10
+connect time: 155 s
+bytes sent: 22826208 B
+bytes rcvd: 567084 B
+bytes sum: 22.30 MB
+average speed: 147.38 KB/s
+##################################
+Now User zhangwei is connected!!!
+##################################
+time: 2020-11-18_20:33:35
+clientIP: 
+username: zhangwei
+device: ppp0
+vpnIP: 192.168.42.1
+assignIP: 192.168.42.10
+#####################################
+Now User zhangwei is disconnected!!!
+#####################################
+time: 2020-11-18_20:39:40
+clientIP: 
+username: zhangwei
+device: ppp0
+vpnIP: 192.168.42.1
+assignIP: 192.168.42.10
+connect time: 365 s
+bytes sent: 875237 B
+bytes rcvd: 258161 B
+bytes sum: 1.08 MB
+average speed: 3.03 KB/s
+##################################
+Now User xingruitao is connected!!!
+##################################
+time: 2020-11-18_21:12:46
+clientIP: 
+username: xingruitao
+device: ppp0
+vpnIP: 192.168.42.1
+assignIP: 192.168.42.10
+##################################
+Now User pengshiwen is connected!!!
+##################################
+time: 2020-11-18_22:23:02
+clientIP: 
+username: pengshiwen
+device: ppp1
+vpnIP: 192.168.42.1
+assignIP: 192.168.42.11
+#####################################
+Now User xingruitao is disconnected!!!
+#####################################
+time: 2020-11-18_22:42:37
+clientIP: 
+username: xingruitao
+device: ppp0
+vpnIP: 192.168.42.1
+assignIP: 192.168.42.10
+connect time: 5391 s
+bytes sent: 18843095 B
+bytes rcvd: 4083585 B
+bytes sum: 21.86 MB
+average speed: 4.15 KB/s
+#####################################
+Now User pengshiwen is disconnected!!!
+#####################################
+time: 2020-11-18_22:55:30
+clientIP: 
+username: pengshiwen
+device: ppp1
+vpnIP: 192.168.42.1
+assignIP: 192.168.42.11
+connect time: 1948 s
+bytes sent: 202516252 B
+bytes rcvd: 5705909 B
+bytes sum: 198.57 MB
+average speed: 104.38 KB/s
+##################################
+Now User pengshiwen is connected!!!
+##################################
+time: 2020-11-18_23:59:16
+clientIP: 
+username: pengshiwen
+device: ppp0
+vpnIP: 192.168.42.1
+assignIP: 192.168.42.10
+#####################################
+Now User pengshiwen is disconnected!!!
+#####################################
+time: 2020-11-19_00:00:44
+clientIP: 
+username: pengshiwen
+device: ppp0
+vpnIP: 192.168.42.1
+assignIP: 192.168.42.10
+connect time: 88 s
+bytes sent: 1350693 B
+bytes rcvd: 480425 B
+bytes sum: 1.74 MB
+average speed: 20.32 KB/s

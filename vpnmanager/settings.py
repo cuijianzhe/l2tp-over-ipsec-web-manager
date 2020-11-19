@@ -19,9 +19,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 #windows目录
 # filedata_dir = os.path.join("data")  #读取L2TP文件目录
 # ipsecpwd_dir = os.path.join("ipsec") #读取ipsec passwd文件
-# # centos 目录
+
+# centos 目录
 filedata_dir = os.path.join("/etc/ppp")  #读取L2TP文件目录
 ipsecpwd_dir = os.path.join("/etc/ipsec.d") #读取ipsec passwd文件
+logfile_dir = os.path.join('/var/log/')  #读取log文件
+
+#配置文件、日志文件、用户文件
+logfile_path = os.path.join(filedata_dir,"pptpd.log") #日志文件
 filedata_path=os.path.join(filedata_dir,"chap-secrets")  # 配置文件
 ipsecpwd_path = os.path.join(ipsecpwd_dir,"passwd")
 filedata_path_bak = os.path.join(filedata_dir,"chap-secrets.bak")  # 备份配置文件 (修改的时候需要使用请一定要与配置文件名称一样)
