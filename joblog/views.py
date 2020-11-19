@@ -9,7 +9,7 @@ def JobLogView(request):
     log_content += [line for line in open(log_file, 'r', encoding='UTF-8')]
 
     context = {
-        'page_name': '作业日志',
+        'page_name': 'vpn连接日志',
         'log_content': log_content,
     }
     if request.method == 'GET':
