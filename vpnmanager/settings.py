@@ -37,7 +37,7 @@ userinfo_path = os.path.join(filedata_dir,"userinfo")  # 用户文件
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'gz2(9d4)jix=iedxkshgvkxv%s^%4o*oxdq4=yerj9d$h&=b$g'
+SECRET_KEY = 'gz2(9d4)jix=iedxkshgvkxv%s^%4o*oxdq4=yerj9d$h&=b$g!@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
