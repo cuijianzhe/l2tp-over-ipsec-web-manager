@@ -35,6 +35,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 * 权限验证登录
 * 使用说明
 * 用户详情信息
+* 测试
 
 ## 1.2. administrator权限
 
